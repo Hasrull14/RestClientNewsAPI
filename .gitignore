@@ -1,0 +1,8 @@
+# Environment
+.env
+.env.*
+
+# Dependencies
+/vendor/
+
+# Local configuration

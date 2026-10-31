@@ -1,8 +1,17 @@
 
 <?php
 
-define("NEWS_API_KEY", "11ebcc6f54d346a385b083fb9cc35d91");
+// Memuat Composer Autoload
+require_once __DIR__ . "/../vendor/autoload.php";
 
+// Membaca file .env
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+$dotenv->load();
+
+// Mengambil API Key dari .env
+define("NEWS_API_KEY", $_ENV["NEWS_API_KEY"]);
+
+// Fungsi HTTP GET Request
 function http_request_get($url)
 {
     $ch = curl_init();
@@ -14,10 +23,7 @@ function http_request_get($url)
         CURLOPT_CONNECTTIMEOUT => 10,
         CURLOPT_TIMEOUT => 20,
         CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_SSL_VERIFYPEER => true,
-        CURLOPT_HTTPHEADER => [
-            "Accept: application/json"
-        ]
+        CURLOPT_SSL_VERIFYPEER => true
     ]);
 
     $response = curl_exec($ch);
@@ -55,6 +61,7 @@ function http_request_get($url)
     ];
 }
 
+// Escape HTML
 function e($value)
 {
     return htmlspecialchars(
@@ -63,4 +70,3 @@ function e($value)
         "UTF-8"
     );
 }
-

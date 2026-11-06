@@ -3,6 +3,6 @@
 .env.*
 
 # Dependencies
-/vendor/
+
 
 # Local configuration
